@@ -37,10 +37,6 @@ public:
     bool isAlive() const { return alive; }
     void kill() { alive = false; }
 
-    void moveRandomly(int mapSizeX, int mapSizeY);
-    bool isInRangeForKill(const NPC& other) const;
-    int rollDice() const;
-
     virtual void save(std::ofstream& os) const = 0;
     static std::shared_ptr<NPC> load(std::ifstream& is);
 };

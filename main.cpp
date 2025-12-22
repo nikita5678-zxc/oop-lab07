@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <atomic>
 
 
 std::vector<std::shared_ptr<NPC>> npcs;
@@ -24,30 +25,29 @@ std::queue<BattleTask> battleQueue;
 std::mutex battleQueueMutex;
 std::condition_variable battleQueueCV;
 
-bool gameRunning = true;
+std::atomic<bool> gameRunning{true};
 const int MAP_SIZE_X = 100;
 const int MAP_SIZE_Y = 100;
 const int GAME_DURATION_SECONDS = 30;
 
 
 void movementThread() {
-    while (gameRunning) {
+    while (gameRunning.load(std::memory_order_relaxed)) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+        {
+            std::lock_guard<std::shared_mutex> lock(npcsMutex);
+            for (auto& npc : npcs) {
+                if (npc->isAlive()) {
+                    npc->moveRandomly(MAP_SIZE_X, MAP_SIZE_Y);
+                }
+            }
+        }
 
         std::vector<std::shared_ptr<NPC>> localNpcs;
         {
             std::shared_lock<std::shared_mutex> lock(npcsMutex);
             localNpcs = npcs;
-        }
-
-        for (auto& npc : localNpcs) {
-            if (npc->isAlive()) {
-                npc->moveRandomly(MAP_SIZE_X, MAP_SIZE_Y);
-            }
-        }
-
-        {
-            std::shared_lock<std::shared_mutex> lock(npcsMutex);
             for (size_t i = 0; i < localNpcs.size(); ++i) {
                 if (!localNpcs[i]->isAlive()) continue;
                 for (size_t j = i + 1; j < localNpcs.size(); ++j) {
@@ -55,7 +55,7 @@ void movementThread() {
                     if (localNpcs[i]->isInRangeForKill(*localNpcs[j])) {
                         BattleTask task{localNpcs[i], localNpcs[j]};
                         {
-                            std::lock_guard<std::mutex> lock(battleQueueMutex);
+                            std::lock_guard<std::mutex> qLock(battleQueueMutex);
                             battleQueue.push(task);
                         }
                         battleQueueCV.notify_one();
@@ -67,11 +67,11 @@ void movementThread() {
 }
 
 void battleThread() {
-    while (gameRunning) {
+    while (true) {
         std::unique_lock<std::mutex> lock(battleQueueMutex);
-        battleQueueCV.wait(lock, [] { return !battleQueue.empty() || !gameRunning; });
+        battleQueueCV.wait(lock, [] { return !battleQueue.empty() || !gameRunning.load(std::memory_order_relaxed); });
 
-        if (!gameRunning && battleQueue.empty()) break;
+        if (!gameRunning.load(std::memory_order_relaxed) && battleQueue.empty()) break;
 
         if (!battleQueue.empty()) {
             BattleTask task = battleQueue.front();
@@ -180,7 +180,7 @@ int main() {
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
 
         if (elapsed >= GAME_DURATION_SECONDS) {
-            gameRunning = false;
+            gameRunning.store(false, std::memory_order_relaxed);
             break;
         }
 
