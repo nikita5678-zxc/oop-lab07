@@ -1,4 +1,4 @@
-#include "../include/npc_system.hpp"
+#include "include/npc_system.hpp"
 #include <thread>
 #include <mutex>
 #include <shared_mutex>
@@ -9,8 +9,9 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-
-
+#include <atomic>
+ 
+ 
 std::vector<std::shared_ptr<NPC>> npcs;
 std::shared_mutex npcsMutex;        
 std::mutex coutMutex;               
@@ -23,15 +24,15 @@ struct BattleTask {
 std::queue<BattleTask> battleQueue;
 std::mutex battleQueueMutex;
 std::condition_variable battleQueueCV;
-
-bool gameRunning = true;
+ 
+std::atomic<bool> gameRunning{true};
 const int MAP_SIZE_X = 100;
 const int MAP_SIZE_Y = 100;
 const int GAME_DURATION_SECONDS = 30;
 
 
 void movementThread() {
-    while (gameRunning) {
+    while (gameRunning.load()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
         std::vector<std::shared_ptr<NPC>> localNpcs;
@@ -67,11 +68,11 @@ void movementThread() {
 }
 
 void battleThread() {
-    while (gameRunning) {
+    while (gameRunning.load()) {
         std::unique_lock<std::mutex> lock(battleQueueMutex);
-        battleQueueCV.wait(lock, [] { return !battleQueue.empty() || !gameRunning; });
-
-        if (!gameRunning && battleQueue.empty()) break;
+        battleQueueCV.wait(lock, [] { return !battleQueue.empty() || !gameRunning.load(); });
+ 
+        if (!gameRunning.load() && battleQueue.empty()) break;
 
         if (!battleQueue.empty()) {
             BattleTask task = battleQueue.front();
@@ -180,7 +181,7 @@ int main() {
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
 
         if (elapsed >= GAME_DURATION_SECONDS) {
-            gameRunning = false;
+            gameRunning.store(false);
             break;
         }
 
