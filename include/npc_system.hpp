@@ -26,16 +26,16 @@ public:
     virtual void accept(Visitor& visitor) = 0;
     virtual bool fight(std::shared_ptr<NPC> other) = 0;
 
+    void moveRandomly(int mapSizeX, int mapSizeY);
+    bool isInRangeForKill(const NPC& other) const;
+    int rollDice() const;
+
     virtual std::string getType() const = 0;
     const std::string& getName() const { return name; }
     int getX() const { return x; }
     int getY() const { return y; }
     bool isAlive() const { return alive; }
     void kill() { alive = false; }
-
-    void moveRandomly(int mapSizeX, int mapSizeY);
-    bool isInRangeForKill(const NPC& other) const;
-    int rollDice() const;
 
     virtual void save(std::ofstream& os) const = 0;
     static std::shared_ptr<NPC> load(std::ifstream& is);
