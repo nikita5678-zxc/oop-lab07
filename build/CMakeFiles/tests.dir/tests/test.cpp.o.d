@@ -198,6 +198,19 @@ CMakeFiles/tests.dir/tests/test.cpp.o: D:/oop/lab07/tests/test.cpp \
  C:/msys64/mingw64/include/c++/14.2.0/numeric \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_numeric.h \
  C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h \
+ C:/msys64/mingw64/include/c++/14.2.0/iostream \
+ C:/msys64/mingw64/include/c++/14.2.0/mutex \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/chrono.h \
+ C:/msys64/mingw64/include/c++/14.2.0/ratio \
+ C:/msys64/mingw64/include/c++/14.2.0/ctime \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/parse_numbers.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/std_mutex.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/unique_lock.h \
+ C:/msys64/mingw64/include/c++/14.2.0/algorithm \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algo.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/algorithmfwd.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_heap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
  C:/msys64/mingw64/include/gtest/gtest.h \
  C:/msys64/mingw64/include/c++/14.2.0/set \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_tree.h \
@@ -213,10 +226,8 @@ CMakeFiles/tests.dir/tests/test.cpp.o: D:/oop/lab07/tests/test.cpp \
  C:/msys64/mingw64/include/c++/14.2.0/ciso646 \
  C:/msys64/mingw64/include/string.h \
  C:/msys64/mingw64/include/sec_api/string_s.h \
- C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/locale \
  C:/msys64/mingw64/include/c++/14.2.0/bits/locale_facets_nonio.h \
- C:/msys64/mingw64/include/c++/14.2.0/ctime \
  C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/time_members.h \
  C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/messages_members.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/locale_facets_nonio.tcc \
@@ -226,12 +237,6 @@ CMakeFiles/tests.dir/tests/test.cpp.o: D:/oop/lab07/tests/test.cpp \
  C:/msys64/mingw64/include/gtest/internal/gtest-port-arch.h \
  C:/msys64/mingw64/include/direct.h \
  C:/msys64/mingw64/include/c++/14.2.0/condition_variable \
- C:/msys64/mingw64/include/c++/14.2.0/bits/chrono.h \
- C:/msys64/mingw64/include/c++/14.2.0/ratio \
- C:/msys64/mingw64/include/c++/14.2.0/bits/parse_numbers.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/std_mutex.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/unique_lock.h \
- C:/msys64/mingw64/include/c++/14.2.0/mutex \
  C:/msys64/mingw64/include/c++/14.2.0/any \
  C:/msys64/mingw64/include/c++/14.2.0/optional \
  C:/msys64/mingw64/include/c++/14.2.0/bits/enable_special_members.h \

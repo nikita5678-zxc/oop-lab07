@@ -6,9 +6,19 @@
 #include <fstream>
 #include <cmath>
 #include <random>
+#include <iostream>
+#include <mutex>
+#include <algorithm>
+#include <stdexcept>
+#include <tuple>
 
 class Visitor;
-class Observer;
+class NPC;
+
+struct IFightObserver {
+    virtual ~IFightObserver() = default;
+    virtual void on_fight(const std::shared_ptr<NPC> attacker, const std::shared_ptr<NPC> defender, bool win) = 0;
+};
 
 class NPC : public std::enable_shared_from_this<NPC> {
 protected:
@@ -17,6 +27,8 @@ protected:
     bool alive = true;
     int moveDistance;
     int killDistance;
+    std::vector<std::shared_ptr<IFightObserver>> observers;
+    mutable std::mutex mtx;
 
 public:
     NPC(const std::string& n, int x_, int y_, int moveDist, int killDist)
@@ -36,6 +48,11 @@ public:
     int getY() const { return y; }
     bool isAlive() const { return alive; }
     void kill() { alive = false; }
+    
+    std::tuple<int, int> position() const;
+    void subscribe(std::shared_ptr<IFightObserver> observer);
+    void fight_notify(const std::shared_ptr<NPC> defender, bool win);
+    virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance);
 
     virtual void save(std::ofstream& os) const = 0;
     static std::shared_ptr<NPC> load(std::ifstream& is);
@@ -99,28 +116,8 @@ private:
     }
 };
 
-class Observer {
-public:
-    virtual ~Observer() = default;
-    virtual void onKill(const std::string& killer, const std::string& victim) = 0;
-};
-
-class ConsoleObserver : public Observer {
-public:
-    void onKill(const std::string& killer, const std::string& victim) override;
-};
-
-class FileObserver : public Observer {
-    std::ofstream logFile;
-public:
-    FileObserver(const std::string& filename = "log.txt");
-    ~FileObserver();
-    void onKill(const std::string& killer, const std::string& victim) override;
-};
-
 class Dungeon {
     std::vector<std::shared_ptr<NPC>> npcs;
-    std::vector<std::shared_ptr<Observer>> observers;
 
 public:
     bool addNPC(std::shared_ptr<NPC> npc);
@@ -128,6 +125,4 @@ public:
     void save(const std::string& filename) const;
     void load(const std::string& filename);
     void battle(double range);
-    void addObserver(std::shared_ptr<Observer> obs);
-    void notifyKill(const std::string& killer, const std::string& victim);
 };

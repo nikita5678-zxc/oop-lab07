@@ -89,16 +89,18 @@ TEST(FightTest, DuckDoesNotKillAnyone) {
 }
 
 
-class TestObserver : public Observer {
+class TestObserver : public IFightObserver {
 public:
     int calls = 0;
-    std::string lastKiller;
-    std::string lastVictim;
+    std::shared_ptr<NPC> lastAttacker;
+    std::shared_ptr<NPC> lastDefender;
+    bool lastWin = false;
 
-    void onKill(const std::string& killer, const std::string& victim) override {
+    void on_fight(const std::shared_ptr<NPC> attacker, const std::shared_ptr<NPC> defender, bool win) override {
         ++calls;
-        lastKiller = killer;
-        lastVictim = victim;
+        lastAttacker = attacker;
+        lastDefender = defender;
+        lastWin = win;
     }
 };
 
@@ -111,10 +113,11 @@ TEST(DungeonTest, AddNPCReturnsTrueAndStoresNPC) {
 TEST(DungeonTest, BattleNotifiesObserverOnKill) {
     Dungeon d;
     auto obs = std::make_shared<TestObserver>();
-    d.addObserver(obs);
 
     auto bear = std::make_shared<Bear>("Bear", 0, 0);
     auto duck = std::make_shared<Duck>("Duck", 1, 1); 
+
+    bear->subscribe(obs);
 
     d.addNPC(bear);
     d.addNPC(duck);
@@ -122,8 +125,9 @@ TEST(DungeonTest, BattleNotifiesObserverOnKill) {
     d.battle(10.0); 
 
     EXPECT_GE(obs->calls, 1);
-    EXPECT_EQ(obs->lastKiller, bear->getName());
-    EXPECT_EQ(obs->lastVictim, duck->getName());
+    EXPECT_EQ(obs->lastAttacker->getName(), bear->getName());
+    EXPECT_EQ(obs->lastDefender->getName(), duck->getName());
+    EXPECT_TRUE(obs->lastWin);
 }
 
 

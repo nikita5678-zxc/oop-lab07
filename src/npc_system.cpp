@@ -42,23 +42,57 @@ int NPC::rollDice() const {
     return dice(gen);
 }
 
+std::tuple<int, int> NPC::position() const {
+    std::lock_guard<std::mutex> lck(mtx);
+    return std::make_tuple(x, y);
+}
+
+void NPC::subscribe(std::shared_ptr<IFightObserver> observer) {
+    std::lock_guard<std::mutex> lck(mtx);
+    observers.push_back(observer);
+}
+
+void NPC::fight_notify(const std::shared_ptr<NPC> defender, bool win) {
+    std::lock_guard<std::mutex> lck(mtx);
+    auto self = std::shared_ptr<NPC>(this, [](NPC *) {});
+    for (auto &o : observers) {
+        o->on_fight(self, defender, win);
+    }
+}
+
+bool NPC::is_close(const std::shared_ptr<NPC> &other, size_t distance) {
+    std::lock_guard<std::mutex> lck(mtx);
+    const auto [other_x, other_y] = other->position();
+    if ((std::pow(x - other_x, 2) + std::pow(y - other_y, 2)) <= std::pow(distance, 2))
+        return true;
+    else
+        return false;
+}
+
 void Bear::accept(Visitor& visitor) {
     visitor.visit(std::static_pointer_cast<Bear>(shared_from_this()));
 }
 
 bool Bear::fight(std::shared_ptr<NPC> other) {
     if (!other || !other->isAlive()) return false;
+    bool win = false;
     if (dynamic_cast<Duck*>(other.get())) {
         other->kill();
+        win = true;
+        fight_notify(other, win);
         return true;
     }
     if (dynamic_cast<Desman*>(other.get())) {
         other->kill();
+        win = true;
+        fight_notify(other, win);
         return true;
     }
     if (dynamic_cast<Bear*>(other.get())) {
         kill();
         other->kill();
+        win = false; // оба умирают
+        fight_notify(other, win);
         return true;
     }
     return false;
@@ -74,6 +108,7 @@ void Duck::accept(Visitor& visitor) {
 
 bool Duck::fight(std::shared_ptr<NPC> other) {
     if (!other || !other->isAlive()) return false;
+    // Утка никого не убивает
     return false;
 }
 
@@ -89,6 +124,8 @@ bool Desman::fight(std::shared_ptr<NPC> other) {
     if (!other || !other->isAlive()) return false;
     if (dynamic_cast<Bear*>(other.get())) {
         other->kill();
+        bool win = true;
+        fight_notify(other, win);
         return true;
     }
     return false;
@@ -131,24 +168,6 @@ void BattleVisitor::visit(std::shared_ptr<Desman> target) {
     }
 }
 
-void ConsoleObserver::onKill(const std::string& killer, const std::string& victim) {
-    std::cout << "[KILL] " << killer << " killed " << victim << std::endl;
-}
-
-FileObserver::FileObserver(const std::string& filename)
-    : logFile(filename, std::ios::app) {
-    if (!logFile.is_open()) {
-        throw std::runtime_error("Cannot open log file: " + filename);
-    }
-}
-
-FileObserver::~FileObserver() {
-    if (logFile.is_open()) logFile.close();
-}
-
-void FileObserver::onKill(const std::string& killer, const std::string& victim) {
-    logFile << "[KILL] " << killer << " killed " << victim << std::endl;
-}
 
 bool Dungeon::addNPC(std::shared_ptr<NPC> npc) {
     if (!npc) return false;
@@ -184,16 +203,6 @@ void Dungeon::load(const std::string& filename) {
     }
 }
 
-void Dungeon::addObserver(std::shared_ptr<Observer> obs) {
-    observers.push_back(obs);
-}
-
-void Dungeon::notifyKill(const std::string& killer, const std::string& victim) {
-    for (auto& obs : observers) {
-        obs->onKill(killer, victim);
-    }
-}
-
 void Dungeon::battle(double range) {
     for (size_t i = 0; i < npcs.size(); ++i) {
         if (!npcs[i]->isAlive()) continue;
@@ -205,15 +214,9 @@ void Dungeon::battle(double range) {
             if (dist <= range) {
                 BattleVisitor visitor_i(npcs[i], range);
                 npcs[j]->accept(visitor_i);
-                if (visitor_i.wasKill()) {
-                    notifyKill(visitor_i.getKiller(), visitor_i.getVictim());
-                }
-
+                
                 BattleVisitor visitor_j(npcs[j], range);
                 npcs[i]->accept(visitor_j);
-                if (visitor_j.wasKill()) {
-                    notifyKill(visitor_j.getKiller(), visitor_j.getVictim());
-                }
             }
         }
     }

@@ -198,24 +198,28 @@ CMakeFiles/main.dir/main.cpp.o: D:/oop/lab07/main.cpp \
  C:/msys64/mingw64/include/c++/14.2.0/numeric \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_numeric.h \
  C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h \
- C:/msys64/mingw64/include/c++/14.2.0/thread \
- C:/msys64/mingw64/include/c++/14.2.0/bits/std_thread.h \
- C:/msys64/mingw64/include/c++/14.2.0/bits/this_thread_sleep.h \
+ C:/msys64/mingw64/include/c++/14.2.0/iostream \
+ C:/msys64/mingw64/include/c++/14.2.0/mutex \
  C:/msys64/mingw64/include/c++/14.2.0/bits/chrono.h \
  C:/msys64/mingw64/include/c++/14.2.0/ratio \
  C:/msys64/mingw64/include/c++/14.2.0/ctime \
  C:/msys64/mingw64/include/c++/14.2.0/bits/parse_numbers.h \
- C:/msys64/mingw64/include/c++/14.2.0/mutex \
  C:/msys64/mingw64/include/c++/14.2.0/bits/std_mutex.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/unique_lock.h \
+ C:/msys64/mingw64/include/c++/14.2.0/algorithm \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algo.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/algorithmfwd.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/stl_heap.h \
+ C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
+ C:/msys64/mingw64/include/c++/14.2.0/thread \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/std_thread.h \
+ C:/msys64/mingw64/include/c++/14.2.0/bits/this_thread_sleep.h \
  C:/msys64/mingw64/include/c++/14.2.0/shared_mutex \
  C:/msys64/mingw64/include/c++/14.2.0/condition_variable \
  C:/msys64/mingw64/include/c++/14.2.0/queue \
  C:/msys64/mingw64/include/c++/14.2.0/deque \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_deque.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/deque.tcc \
- C:/msys64/mingw64/include/c++/14.2.0/bits/stl_heap.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_queue.h \
  C:/msys64/mingw64/include/c++/14.2.0/chrono \
- C:/msys64/mingw64/include/c++/14.2.0/iostream \
  C:/msys64/mingw64/include/c++/14.2.0/atomic

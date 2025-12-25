@@ -9,10 +9,12 @@ CMakeFiles/main.dir/main.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/_mingw_secapi.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/_mingw_stat64.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/_timeval.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/algorithm
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/atomic
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/backward/auto_ptr.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/backward/binders.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bit
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/algorithmfwd.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/align.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/alloc_traits.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/allocated_ptr.h
@@ -70,6 +72,7 @@ CMakeFiles/main.dir/main.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/std_mutex.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/std_thread.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algo.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algobase.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_construct.h
@@ -137,6 +140,7 @@ CMakeFiles/main.dir/main.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/numeric
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/ostream
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/execution_defs.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_algorithm_defs.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/pstl_config.h
@@ -253,6 +257,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/charconv.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/chrono.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/codecvt.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/concept_check.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/cpp_type_traits.h
@@ -280,6 +285,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/new_allocator.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/ostream_insert.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/parse_numbers.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/predefined_ops.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/ptr_traits.h
@@ -293,6 +299,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/shared_ptr_base.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/specfun.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/std_mutex.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algo.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_algobase.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h
@@ -313,6 +320,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/string_view.tcc
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/uniform_int_dist.h
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/unique_lock.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/unique_ptr.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/bits/uses_allocator_args.h
@@ -328,6 +336,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/cstdint
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/cstdio
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/cstdlib
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/ctime
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/cwchar
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/cwctype
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/debug/assertions.h
@@ -348,6 +357,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/istream
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/limits
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/memory
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/mutex
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/new
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/numeric
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/ostream
@@ -357,6 +367,7 @@ CMakeFiles/main.dir/src/npc_system.cpp.o
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/pstl/pstl_config.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/random
+ /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/ratio
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/stdexcept
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/stdlib.h
  /d/oop/lab07/build/C:/msys64/mingw64/include/c++/14.2.0/streambuf
