@@ -167,7 +167,7 @@ int main() {
         }
     }
 
-    std::cout << "Starting game with 50 NPCs..." << std::endl;
+    std::cout << "Starting game with 50 NPCs" << std::endl;
 
     std::thread moveThread(movementThread);
     std::thread battleTh(battleThread);
@@ -205,8 +205,7 @@ int main() {
         std::cout << "\n=== GAME OVER ===" << std::endl;
         std::cout << "Survivors: " << survivors.size() << std::endl;
         for (const auto& npc : survivors) {
-            std::cout << "[" << npc->getType() << "] " << npc->getName()
-                      << " @ (" << npc->getX() << ", " << npc->getY() << ")\n";
+            std::cout << "[" << npc->getType() << "] " << npc->getName() << " @ (" << npc->getX() << ", " << npc->getY() << ")\n";
         }
     }
 

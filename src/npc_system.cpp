@@ -95,7 +95,7 @@ bool Bear::fight(std::shared_ptr<NPC> other) {
     if (dynamic_cast<Bear*>(other.get())) {
         kill();
         other->kill();
-        win = false; // оба умирают
+        win = false;
         fight_notify(other, win);
         return true;
     }
@@ -114,7 +114,6 @@ void Duck::accept(Visitor& visitor) {
 
 bool Duck::fight(std::shared_ptr<NPC> other) {
     if (!other || !other->isAlive()) return false;
-    // Утка никого не убивает
     return false;
 }
 
@@ -184,8 +183,7 @@ bool Dungeon::addNPC(std::shared_ptr<NPC> npc) {
 void Dungeon::print() const {
     for (const auto& npc : npcs) {
         if (npc->isAlive()) {
-            std::cout << "[" << npc->getType() << "] "
-                      << npc->getName() << " @ (" << npc->getX() << ", " << npc->getY() << ")\n";
+            std::cout << "[" << npc->getType() << "] " << npc->getName() << " @ (" << npc->getX() << ", " << npc->getY() << ")\n";
         }
     }
 }
