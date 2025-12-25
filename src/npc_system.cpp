@@ -69,6 +69,10 @@ bool NPC::is_close(const std::shared_ptr<NPC> &other, size_t distance) {
         return false;
 }
 
+void NPC::print(std::ostream& os) const {
+    os << "[" << getType() << "] " << name << " @ (" << x << ", " << y << ")\n";
+}
+
 void Bear::accept(Visitor& visitor) {
     visitor.visit(std::static_pointer_cast<Bear>(shared_from_this()));
 }
@@ -101,6 +105,8 @@ bool Bear::fight(std::shared_ptr<NPC> other) {
 void Bear::save(std::ofstream& os) const {
     os << "Bear " << name << " " << x << " " << y << "\n";
 }
+
+std::mutex TextObserver::print_mutex;
 
 void Duck::accept(Visitor& visitor) {
     visitor.visit(std::static_pointer_cast<Duck>(shared_from_this()));

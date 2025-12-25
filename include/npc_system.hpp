@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <tuple>
+#include <ostream>
 
 class Visitor;
 class NPC;
@@ -53,6 +54,8 @@ public:
     void subscribe(std::shared_ptr<IFightObserver> observer);
     void fight_notify(const std::shared_ptr<NPC> defender, bool win);
     virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance);
+    
+    virtual void print(std::ostream& os) const;
 
     virtual void save(std::ofstream& os) const = 0;
     static std::shared_ptr<NPC> load(std::ifstream& is);
@@ -113,6 +116,51 @@ public:
 private:
     double distance(const NPC& a, const NPC& b) const {
         return std::hypot(a.getX() - b.getX(), a.getY() - b.getY());
+    }
+};
+
+class TextObserver : public IFightObserver {
+private:
+    static std::mutex print_mutex;
+    TextObserver() {}
+
+public:
+    static std::shared_ptr<IFightObserver> get() {
+        static TextObserver instance;
+        return std::shared_ptr<IFightObserver>(&instance, [](IFightObserver*) {});
+    }
+
+    void on_fight(const std::shared_ptr<NPC> attacker, const std::shared_ptr<NPC> defender, bool win) override {
+        if (win) {
+            std::lock_guard<std::mutex> lck(print_mutex);
+            std::cout << "\n" << "Убийца --------" << "\n";
+            attacker->print(std::cout);
+            defender->print(std::cout);
+        }
+    }
+};
+
+class FileObserver : public IFightObserver {
+private:
+    std::ofstream fs;
+    mutable std::mutex file_mutex;
+    FileObserver() { fs.open("log.txt", std::ios::app); }
+
+public:
+    ~FileObserver() { fs.close(); }
+
+    static std::shared_ptr<IFightObserver> get() {
+        static FileObserver instance;
+        return std::shared_ptr<IFightObserver>(&instance, [](IFightObserver*) {});
+    }
+
+    void on_fight(const std::shared_ptr<NPC> attacker, const std::shared_ptr<NPC> defender, bool win) override {
+        if (win) {
+            std::lock_guard<std::mutex> lock(file_mutex);
+            fs << "\n" << "Убийца --------" << "\n";
+            attacker->print(fs);
+            defender->print(fs);
+        }
     }
 };
 
