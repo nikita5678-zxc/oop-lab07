@@ -98,12 +98,11 @@ public:
 
 class BattleVisitor : public Visitor {
     std::shared_ptr<NPC> attacker;
-    double range;
     std::string _killer, _victim;
     bool _killOccurred = false;
 
 public:
-    BattleVisitor(std::shared_ptr<NPC> a, double r) : attacker(a), range(r) {}
+    BattleVisitor(std::shared_ptr<NPC> a) : attacker(a) {}
 
     void visit(std::shared_ptr<Bear> target) override;
     void visit(std::shared_ptr<Duck> target) override;
@@ -112,11 +111,6 @@ public:
     bool wasKill() const { return _killOccurred; }
     std::string getKiller() const { return _killer; }
     std::string getVictim() const { return _victim; }
-
-private:
-    double distance(const NPC& a, const NPC& b) const {
-        return std::hypot(a.getX() - b.getX(), a.getY() - b.getY());
-    }
 };
 
 class TextObserver : public IFightObserver {
@@ -162,15 +156,4 @@ public:
             defender->print(fs);
         }
     }
-};
-
-class Dungeon {
-    std::vector<std::shared_ptr<NPC>> npcs;
-
-public:
-    bool addNPC(std::shared_ptr<NPC> npc);
-    void print() const;
-    void save(const std::string& filename) const;
-    void load(const std::string& filename);
-    void battle(double range);
 };

@@ -28,7 +28,6 @@ const int MAP_SIZE_X = 100;
 const int MAP_SIZE_Y = 100;
 const int GAME_DURATION_SECONDS = 30;
 
-
 void movementThread() {
     while (gameRunning.load()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -80,38 +79,12 @@ void battleThread() {
                 continue;
             }
 
-            int attackPower = task.attacker->rollDice();
-            int defensePower = task.target->rollDice();
+            BattleVisitor visitor(task.attacker);
+            task.target->accept(visitor);
 
-            {
+            if (visitor.wasKill()) {
                 std::lock_guard<std::mutex> lock(coutMutex);
-                std::cout << "[BATTLE] " << task.attacker->getName() << " vs " << task.target->getName()
-                          << " (A:" << attackPower << " D:" << defensePower << ")" << std::endl;
-            }
-
-            if (attackPower > defensePower) {
-                {
-                    std::lock_guard<std::shared_mutex> lock(npcsMutex);
-                    task.target->kill();
-                }
-                {
-                    std::lock_guard<std::mutex> lock(coutMutex);
-                    std::cout << " → " << task.attacker->getName() << " killed " << task.target->getName() << std::endl;
-                }
-            } else if (defensePower > attackPower) {
-                {
-                    std::lock_guard<std::shared_mutex> lock(npcsMutex);
-                    task.attacker->kill();
-                }
-                {
-                    std::lock_guard<std::mutex> lock(coutMutex);
-                    std::cout << " → " << task.target->getName() << " killed " << task.attacker->getName() << std::endl;
-                }
-            } else {
-                {
-                    std::lock_guard<std::mutex> lock(coutMutex);
-                    std::cout << " → Draw!" << std::endl;
-                }
+                std::cout << "[BATTLE] " << visitor.getKiller() << " killed " << visitor.getVictim() << std::endl;
             }
         }
     }
@@ -145,6 +118,9 @@ void printMap() {
 }
 
 int main() {
+    auto textObserver = TextObserver::get();
+    auto fileObserver = FileObserver::get();
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> coordX(0, MAP_SIZE_X - 1);
@@ -161,6 +137,8 @@ int main() {
             case 1: npc = std::make_shared<Duck>("Duck" + std::to_string(i), x, y); break;
             case 2: npc = std::make_shared<Desman>("Desman" + std::to_string(i), x, y); break;
         }
+        npc->subscribe(textObserver);
+        npc->subscribe(fileObserver);
         {
             std::lock_guard<std::shared_mutex> lock(npcsMutex);
             npcs.push_back(npc);
