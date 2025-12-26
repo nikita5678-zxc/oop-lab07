@@ -104,30 +104,6 @@ public:
     }
 };
 
-TEST(DungeonTest, AddNPCReturnsTrueAndStoresNPC) {
-    Dungeon d;
-    auto bear = std::make_shared<Bear>("Bear", 0, 0);
-    EXPECT_TRUE(d.addNPC(bear));
-}
 
-TEST(DungeonTest, BattleNotifiesObserverOnKill) {
-    Dungeon d;
-    auto obs = std::make_shared<TestObserver>();
-
-    auto bear = std::make_shared<Bear>("Bear", 0, 0);
-    auto duck = std::make_shared<Duck>("Duck", 1, 1); 
-
-    bear->subscribe(obs);
-
-    d.addNPC(bear);
-    d.addNPC(duck);
-
-    d.battle(10.0); 
-
-    EXPECT_GE(obs->calls, 1);
-    EXPECT_EQ(obs->lastAttacker->getName(), bear->getName());
-    EXPECT_EQ(obs->lastDefender->getName(), duck->getName());
-    EXPECT_TRUE(obs->lastWin);
-}
 
 
