@@ -1,0 +1,68 @@
+
+Убийца --------
+[Bear] Bear4 @ (53, 96)
+[Duck] Duck31 @ (54, 99)
+
+Убийца --------
+[Desman] Desman15 @ (20, 6)
+[Bear] Bear40 @ (17, 9)
+
+Убийца --------
+[Desman] Desman17 @ (84, 6)
+[Bear] Bear26 @ (65, 9)
+
+Убийца --------
+[Bear] Bear18 @ (23, 65)
+[Desman] Desman25 @ (24, 73)
+
+Убийца --------
+[Bear] Bear18 @ (23, 65)
+[Duck] Duck43 @ (26, 65)
+
+Убийца --------
+[Desman] Desman24 @ (32, 76)
+[Bear] Bear34 @ (46, 75)
+
+Убийца --------
+[Bear] Bear33 @ (99, 92)
+[Duck] Duck44 @ (98, 99)
+
+Убийца --------
+[Bear] Bear1 @ (21, 94)
+[Duck] Duck42 @ (19, 99)
+
+Убийца --------
+[Desman] Desman2 @ (70, 4)
+[Bear] Bear14 @ (55, 9)
+
+Убийца --------
+[Desman] Desman6 @ (35, 52)
+[Bear] Bear18 @ (21, 64)
+
+Убийца --------
+[Desman] Desman3 @ (74, 72)
+[Bear] Bear13 @ (62, 62)
+
+Убийца --------
+[Desman] Desman3 @ (74, 72)
+[Bear] Bear16 @ (56, 75)
+
+Убийца --------
+[Desman] Desman3 @ (74, 72)
+[Bear] Bear49 @ (63, 60)
+
+Убийца --------
+[Desman] Desman15 @ (19, 12)
+[Bear] Bear30 @ (18, 29)
+
+Убийца --------
+[Desman] Desman19 @ (52, 88)
+[Bear] Bear23 @ (58, 92)
+
+Убийца --------
+[Bear] Bear37 @ (99, 44)
+[Duck] Duck39 @ (99, 50)
+
+Убийца --------
+[Desman] Desman38 @ (28, 11)
+[Bear] Bear48 @ (27, 22)
